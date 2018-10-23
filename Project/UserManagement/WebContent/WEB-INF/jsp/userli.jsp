@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>ユーザ一覧</title>
+</head>
+<body>
+<div align="right">ユーザ名さん  <a href="">ログアウト</a></div>
+<div align="center"><h2>ユーザ一覧</h2><br><br>
+<div align="right"><a href="">新規登録</a></div><br>
+<table>
+<tr>
+<td>ログインID</td>
+<td><input type="text" size="24" name="ログインID"></td></tr>
+<tr>
+<td>ユーザ名</td>
+<td><input type="text" size="24"  name="ユーザ名"></td>
+</tr>
+<tr>
+<td>生年月日</td>
+<td><input type="text"  size="7" name="生年月日" placeholder="年/月/日"> ～ <input type="text"  size="7"  name="生年月日" placeholder="年/月/日"></td>
+</tr>
+</table><br>
+<div align="right"><input type="submit" value="検索"></div><br><br><hr><br><br>
+<table border="1">
+<tr>
+<th width="100" height="30">ログインID</th>
+<th width="100">ユーザ名</th>
+<th width="140">生年月日</th>
+<th width="170">　　　　</th>
+</tr>
+<tr>
+<td>id0001</td>
+<td>田中太郎</td>
+<td>1989年04月26日</td>
+<td><input type="submit" value="詳細"> <input type="submit" value="更新"> <input type="submit" value="削除"></td>
+</tr>
+<tr>
+<td>id0002</td>
+<td>佐藤二郎</td>
+<td>2001年11月12日</td>
+<td><input type="submit" value="詳細"> <input type="submit" value="更新"> <input type="submit" value="削除"></td>
+</tr>
+<tr><td>id0003</td>
+<td>佐川真司</td>
+<td>2000年01月01日</td>
+<td><input type="submit" value="詳細"> <input type="submit" value="更新"> <input type="submit" value="削除"></td>
+
+</tr>
+</table></div>
+</body>
+</html>
