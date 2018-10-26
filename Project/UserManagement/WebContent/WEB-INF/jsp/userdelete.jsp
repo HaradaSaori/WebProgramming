@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
+<%@ page import="model.User" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -19,8 +22,14 @@
 <body>
 <div align="right">ユーザ名さん  <a href="">ログアウト</a></div>
 <div align="center"><h2>ユーザ削除確認</h2><br><br></div>
-ログインID : id0001<br>
+<%
+// リクエストスコープからインスタンスを取得
+User user = (User)request.getAttribute("userdata");
+%>
+<form action="Userdelete" method="post">
+ログインID : <%= user.getLoginId() %><br>
 を本当に削除してよろしいでしょうか。<br><br>
-<input type="submit" value="キャンセル"> <input type="submit" value="OK">
+<input type="submit" value="OK"></form>
+<input type="submit" value="キャンセル">
 </body>
 </html>

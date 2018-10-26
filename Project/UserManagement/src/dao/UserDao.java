@@ -230,4 +230,35 @@ public class UserDao {
             }
         }
     }
+
+    public void Userdelete() {
+        Connection conn = null;
+        try {
+            // データベースへ接続
+            conn = DBManager.getConnection();
+
+         // DELETE文を準備
+            String sql = "DELETE FROM user WHERE login_id = ?";
+
+         // DELETEを実行
+            PreparedStatement pStmt = conn.prepareStatement(sql);
+            pStmt.executeUpdate();
+
+            pStmt.close();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+
+        } finally {
+            // データベース切断
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+
+                }
+            }
+        }
+    }
 }

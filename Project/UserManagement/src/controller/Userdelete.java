@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import dao.UserDao;
+
 /**
  * Servlet implementation class Userdelete
  */
@@ -36,8 +38,11 @@ public class Userdelete extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		UserDao userDao = new UserDao();
+		userDao.Userdelete();
+
+		// ユーザ一覧のサーブレットにリダイレクト
+		response.sendRedirect("UserListServlet");
 	}
 
 }
