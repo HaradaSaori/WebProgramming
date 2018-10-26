@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
+<%@ page import="model.User" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -19,26 +21,31 @@
 <body>
 <div align="right">ユーザ名さん  <a href="">ログアウト</a></div>
 <div align="center"><h2>ユーザ情報詳細参照</h2><br><br>
-<table>
+<%
+// リクエストスコープからインスタンスを取得
+User user = (User)request.getAttribute("userdata");
+%>
+
+<table width="300">
 <tr>
 <td>ログインID</td>
-<td>id0001</td>
+<td><%= user.getLoginId() %> </td>
 </tr>
 <tr>
 <td>ユーザ名</td>
-<td>田中太郎</td>
+<td><%= user.getName() %> </td>
 </tr>
 <tr>
 <td>生年月日</td>
-<td>1989年04月26日</td>
+<td><%= user.getBirthDate() %> </td>
 </tr>
 <tr>
 <td>登録日時</td>
-<td>2017年01月01日 10:50</td>
+<td><%= user.getCreateDate() %> </td>
 </tr>
 <tr>
 <td>更新日時</td>
-<td>2017年02月01日 01:05</td>
+<td><%= user.getUpdateDate() %> </td>
 </tr></table>
 </div><br><br>
 <a href="">戻る</a>

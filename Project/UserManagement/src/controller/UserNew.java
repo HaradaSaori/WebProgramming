@@ -51,6 +51,7 @@ public class UserNew extends HttpServlet {
 		UserDao userDao = new UserDao();
 		userDao.userNewDate(loginid,password,username,birthday);
 
+
 		// ユーザ一覧のサーブレットにリダイレクト
 		response.sendRedirect("UserListServlet");
 

@@ -123,7 +123,7 @@ public class UserDao {
             conn = DBManager.getConnection();
 
          // INSERT文を準備
-            String sql = "INSERT INTO user(login_id, name, birth_date, password, create_date, update_date) VALUES(?,?,?,?,now(),now())";
+            String sql = "INSERT INTO user(login_id, password, name, birth_date, create_date, update_date) VALUES(?,?,?,?,now(),now())";
 
          // INSERTを実行
             PreparedStatement pStmt = conn.prepareStatement(sql);
@@ -131,7 +131,7 @@ public class UserDao {
             pStmt.setString(2, password);
             pStmt.setString(3, username);
             pStmt.setString(4, birthday);
-            ResultSet rs = pStmt.executeQuery();
+            pStmt.executeUpdate();
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -147,6 +147,53 @@ public class UserDao {
                 }
             }
         }
+    }
+    public User userData(String id) {
+        Connection conn = null;
+        try {
+            // データベースへ接続
+            conn = DBManager.getConnection();
+
+    //SELECT文
+	String sql = "SELECT login_id, name, birth_date, create_date, update_date FROM user WHERE id = ?";
+
+	// SELECTを実行し、結果表（ResultSet）を取得
+	PreparedStatement pStmt = conn.prepareStatement(sql);
+	pStmt.setString(1, id);
+	ResultSet rs = pStmt.executeQuery();
+
+	User user  = null;
+
+    while (rs.next()) {
+        String login_id = rs.getString("login_id");
+        String name = rs.getString("name");
+        Date birth_date = rs.getDate("birth_date");
+        String create_date = rs.getString("create_date");
+        String update_date = rs.getString("update_date");
+
+        user = new User(Integer.parseInt(id), login_id, name, birth_date, null, create_date, update_date);
+
+    }
+
+
+    pStmt.close();
+
+    return user;
+        } catch (SQLException e) {
+            e.printStackTrace();
+
+        } finally {
+            // データベース切断
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+
+                }
+            }
+        }
+        return null;
     }
 }
 
