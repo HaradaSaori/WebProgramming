@@ -9,6 +9,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import dao.UserDao;
+import model.User;
+
 /**
  * Servlet implementation class UserF5
  */
@@ -28,6 +31,20 @@ public class UserF5 extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// URLからGETパラメータとしてIDを受け取る
+		String id = request.getParameter("id");
+
+		// 確認用：idをコンソールに出力
+	       System.out.println(id);
+
+
+		//idを引数にして、idに紐づくユーザ情報を出力する
+	       UserDao userDao = new UserDao();
+		   User userdata = userDao.userData(id);
+
+		   // ユーザ情報をリクエストスコープにセットしてjspにフォワード
+		   request.setAttribute("userdata",userdata);
+
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/userf5.jsp");
 		dispatcher.forward(request, response);
 	}
@@ -36,8 +53,21 @@ public class UserF5 extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+
+		// リクエストパラメータの文字コードを指定
+        request.setCharacterEncoding("UTF-8");
+
+		// リクエストパラメータの入力項目を取得
+		String password = request.getParameter("password");
+		String name = request.getParameter("name");
+		String birth_date = request.getParameter("birth_date");
+		String loginid = request.getParameter("loginid");
+
+		UserDao userDao = new UserDao();
+		userDao.UserF5(password, name, birth_date,loginid);
+
+		// ユーザ一覧のサーブレットにリダイレクト
+		response.sendRedirect("UserListServlet");
 	}
 
 }

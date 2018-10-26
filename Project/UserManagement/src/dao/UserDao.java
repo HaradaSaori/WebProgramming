@@ -195,5 +195,39 @@ public class UserDao {
         }
         return null;
     }
-}
 
+    public void UserF5(String password, String name, String birth_date, String loginid) {
+        Connection conn = null;
+        try {
+            // データベースへ接続
+            conn = DBManager.getConnection();
+
+         // UPDATE文を準備
+            String sql = "UPDATE user SET password = ?,name = ?,birth_date = ?,update_date = now() WHERE login_id = ?";
+
+         // UPDATEを実行
+            PreparedStatement pStmt = conn.prepareStatement(sql);
+            pStmt.setString(1, password);
+            pStmt.setString(2, name);
+            pStmt.setString(3, birth_date);
+            pStmt.setString(4, loginid);
+            pStmt.executeUpdate();
+
+            pStmt.close();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+
+        } finally {
+            // データベース切断
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+
+                }
+            }
+        }
+    }
+}
