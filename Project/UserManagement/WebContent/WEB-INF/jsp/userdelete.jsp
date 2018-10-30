@@ -20,16 +20,46 @@
     <!-- レイアウトカスタマイズ用個別CSS -->
 </head>
 <body>
-<div align="right">ユーザ名さん  <a href="">ログアウト</a></div>
+
+    <!-- header -->
+    <header>
+      <nav class="navbar navbar-inverse">
+      	<div class="container">
+      		<div class="navbar-header">
+            <a class="navbar-brand" href="userCreate.html">ユーザ管理システム</a>
+      		</div>
+
+          <ul class="nav navbar-nav navbar-right">
+            <li class="navbar-text">${userInfo.name} さん </li>
+  			<li class="dropdown">
+  			  <a href="LogoutServlet" class="navbar-link logout-link">ログアウト</a>
+            </li>
+  		  </ul>
+      	</div>
+      </nav>
+    </header>
+    <!-- /header -->
+
 <div align="center"><h2>ユーザ削除確認</h2><br><br></div>
 <%
 // リクエストスコープからインスタンスを取得
 User user = (User)request.getAttribute("userdata");
 %>
-<form action="Userdelete" method="post">
 ログインID : <%= user.getLoginId() %><br>
 を本当に削除してよろしいでしょうか。<br><br>
-<input type="submit" value="OK"></form>
-<input type="submit" value="キャンセル">
+<table>
+<tr>
+<td width="120">
+<form>
+<input type="button" class="btn btn-light" name = "cancel" value="キャンセル" onclick="history.back()">
+</form>
+</td>
+<td width="120">
+<form action="Userdelete" method="post">
+<input type="hidden" value="<%= user.getLoginId() %>" name="loginid">
+
+<input type="submit" class="btn btn-info" name = "submit" value="OK">
+</form>
+</td></tr></table>
 </body>
 </html>

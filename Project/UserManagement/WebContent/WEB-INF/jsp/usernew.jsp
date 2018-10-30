@@ -15,33 +15,58 @@
     <!-- BootstrapのJS読み込み -->
     <script src="js/bootstrap.min.js"></script>
     <!-- レイアウトカスタマイズ用個別CSS -->
+        <style type="text/css">
+    td {
+width: 120px;
+height: 30px;
+}
+</style>
 </head>
 <body>
-<div align="right">ユーザ名さん  <a href="">ログアウト</a></div>
+
+    <!-- header -->
+    <header>
+      <nav class="navbar navbar-inverse">
+      	<div class="container">
+      		<div class="navbar-header">
+            <a class="navbar-brand" href="userCreate.html">ユーザ管理システム</a>
+      		</div>
+
+          <ul class="nav navbar-nav navbar-right">
+            <li class="navbar-text">${userInfo.name} さん </li>
+  			<li class="dropdown">
+  			  <a href="LogoutServlet" class="navbar-link logout-link">ログアウト</a>
+            </li>
+  		  </ul>
+      	</div>
+      </nav>
+    </header>
+    <!-- /header -->
 <div align="center"><h2>ユーザ新規登録</h2><br><br>
 <form action="UserNew" method="post">
 <table>
 <tr>
 <td>ログインID</td>
-<td><input type="text" name="loginid"></td>
+<td><input type="text" name="loginid" required autofocus></td>
 </tr>
 <tr>
 <td>パスワード</td>
-<td><input type="password" size="20" name ="password"></td>
+<td><input type="password" size="20" name ="password" required></td>
 </tr>
 <tr>
 <td>パスワード(確認)</td>
-<td><input type="password" size="20" name ="passwordcon"></td>
+<td><input type="password" size="20" name ="passwordcon" required></td>
 </tr>
 <tr>
 <td>ユーザ名</td>
-<td><input type="text" name="username"></td>
+<td><input type="text" name="username" required></td>
 </tr>
 <tr>
 <td>生年月日</td>
-<td><input type="text" name="birthday"></td></tr></table><br>
-<input type="submit" value="登録"></form></div>
+<td><input type="text" name="birthday" required></td></tr></table><br>
+<input type="submit" class="btn btn-info" value="登録"></form>
+</div>
 <br><br>
-<a href="">戻る</a>
+<a href="UserListServlet">戻る</a>
 </body>
 </html>

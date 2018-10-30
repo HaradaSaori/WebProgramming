@@ -231,7 +231,7 @@ public class UserDao {
         }
     }
 
-    public void Userdelete() {
+    public void Userdelete(String loginid) {
         Connection conn = null;
         try {
             // データベースへ接続
@@ -242,6 +242,7 @@ public class UserDao {
 
          // DELETEを実行
             PreparedStatement pStmt = conn.prepareStatement(sql);
+            pStmt.setString(1, loginid);
             pStmt.executeUpdate();
 
             pStmt.close();

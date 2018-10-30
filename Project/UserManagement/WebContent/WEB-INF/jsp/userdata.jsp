@@ -19,7 +19,24 @@
     <!-- レイアウトカスタマイズ用個別CSS -->
 </head>
 <body>
-<div align="right">ユーザ名さん  <a href="">ログアウト</a></div>
+    <!-- header -->
+    <header>
+      <nav class="navbar navbar-inverse">
+      	<div class="container">
+      		<div class="navbar-header">
+            <a class="navbar-brand" href="userCreate.html">ユーザ管理システム</a>
+      		</div>
+
+          <ul class="nav navbar-nav navbar-right">
+            <li class="navbar-text">${userInfo.name} さん </li>
+  			<li class="dropdown">
+  			  <a href="LogoutServlet" class="navbar-link logout-link">ログアウト</a>
+            </li>
+  		  </ul>
+      	</div>
+      </nav>
+    </header>
+    <!-- /header -->
 <div align="center"><h2>ユーザ情報詳細参照</h2><br><br>
 <%
 // リクエストスコープからインスタンスを取得
@@ -48,6 +65,6 @@ User user = (User)request.getAttribute("userdata");
 <td><%= user.getUpdateDate() %> </td>
 </tr></table>
 </div><br><br>
-<a href="">戻る</a>
+<a href="UserListServlet">戻る</a>
 </body>
 </html>
