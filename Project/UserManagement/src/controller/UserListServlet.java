@@ -13,7 +13,6 @@ import javax.servlet.http.HttpSession;
 
 import dao.UserDao;
 import model.User;
-
 /**
  * Servlet implementation class UserListServlet
  */
@@ -41,15 +40,16 @@ public class UserListServlet extends HttpServlet {
 			}
 
 		// ユーザ一覧情報を取得
-		UserDao userDao = new UserDao();
-		List<User> userList = userDao.findAll();
+				UserDao userDao = new UserDao();
+				List<User> userList = userDao.findAll();
 
-		// リクエストスコープにユーザ一覧情報をセット
-		request.setAttribute("userList", userList);
+				// リクエストスコープにユーザ一覧情報をセット
+				request.setAttribute("userList", userList);
 
-		// ユーザ一覧のjspにフォワード
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/userList.jsp");
-		dispatcher.forward(request, response);
+				// ユーザ一覧のjspにフォワード
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/userList.jsp");
+				dispatcher.forward(request, response);
+
 	}
 
 	/**

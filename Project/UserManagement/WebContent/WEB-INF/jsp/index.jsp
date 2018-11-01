@@ -25,7 +25,7 @@
       <nav class="navbar navbar-inverse">
       	<div class="container">
       		<div class="navbar-header">
-            <a class="navbar-brand" href="index.html">ユーザ管理システム</a>
+            <a class="navbar-brand" href="LoginServlet">ユーザ管理システム</a>
       		</div>
 
       	</div>

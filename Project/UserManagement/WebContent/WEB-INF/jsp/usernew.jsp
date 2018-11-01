@@ -29,7 +29,7 @@ height: 30px;
       <nav class="navbar navbar-inverse">
       	<div class="container">
       		<div class="navbar-header">
-            <a class="navbar-brand" href="userCreate.html">ユーザ管理システム</a>
+            <a class="navbar-brand" href="LoginServlet">ユーザ管理システム</a>
       		</div>
 
           <ul class="nav navbar-nav navbar-right">
@@ -42,28 +42,35 @@ height: 30px;
       </nav>
     </header>
     <!-- /header -->
+       <!-- body -->
+
+	<c:if test="${errMsg != null}" >
+	    <div class="alert alert-danger" role="alert">
+		  ${errMsg}
+		</div>
+	</c:if>
 <div align="center"><h2>ユーザ新規登録</h2><br><br>
 <form action="UserNew" method="post">
 <table>
 <tr>
 <td>ログインID</td>
-<td><input type="text" name="loginid" required autofocus></td>
+<td><input type="text" name="loginid"  autofocus></td>
 </tr>
 <tr>
 <td>パスワード</td>
-<td><input type="password" size="20" name ="password" required></td>
+<td><input type="password" size="20" name ="password"></td>
 </tr>
 <tr>
 <td>パスワード(確認)</td>
-<td><input type="password" size="20" name ="passwordcon" required></td>
+<td><input type="password" size="20" name ="passwordcon" ></td>
 </tr>
 <tr>
 <td>ユーザ名</td>
-<td><input type="text" name="username" required></td>
+<td><input type="text" name="username" ></td>
 </tr>
 <tr>
 <td>生年月日</td>
-<td><input type="text" name="birthday" required></td></tr></table><br>
+<td><input type="text" name="birthday"></td></tr></table><br>
 <input type="submit" class="btn btn-info" value="登録"></form>
 </div>
 <br><br>

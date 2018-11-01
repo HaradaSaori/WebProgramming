@@ -79,11 +79,12 @@ public class UserDao {
 
             // SELECT文を準備
             // TODO: 未実装：管理者以外を取得するようSQLを変更する
-            String sql = "SELECT * FROM user";
+            String sql = "SELECT * FROM user WHERE login_id != 'admin'";
 
              // SELECTを実行し、結果表を取得
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(sql);
+
 
             // 結果表に格納されたレコードの内容を
             // Userインスタンスに設定し、ArrayListインスタンスに追加
@@ -116,7 +117,7 @@ public class UserDao {
         return userList;
     }
 
-    public void userNewDate(String loginid, String password, String username, String birthday) {
+    public void userNewDate(String loginid, String password, String username, String birthday) throws SQLException{
         Connection conn = null;
         try {
             // データベースへ接続
@@ -135,7 +136,7 @@ public class UserDao {
 
         } catch (SQLException e) {
             e.printStackTrace();
-
+            throw e;
         } finally {
             // データベース切断
             if (conn != null) {
@@ -196,7 +197,7 @@ public class UserDao {
         return null;
     }
 
-    public void UserF5(String password, String name, String birth_date, String loginid) {
+    public void UserF5(String password, String name, String birth_date, String loginid)throws SQLException {
         Connection conn = null;
         try {
             // データベースへ接続
@@ -217,6 +218,42 @@ public class UserDao {
 
         } catch (SQLException e) {
             e.printStackTrace();
+            throw e;
+
+        } finally {
+            // データベース切断
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+
+                }
+            }
+        }
+    }
+
+    public void UserF5pass(String name, String birth_date, String loginid)throws SQLException {
+        Connection conn = null;
+        try {
+            // データベースへ接続
+            conn = DBManager.getConnection();
+
+         // UPDATE文を準備
+            String sql = "UPDATE user SET name = ?,birth_date = ?,update_date = now() WHERE login_id = ?";
+
+         // UPDATEを実行
+            PreparedStatement pStmt = conn.prepareStatement(sql);
+            pStmt.setString(1, name);
+            pStmt.setString(2, birth_date);
+            pStmt.setString(3, loginid);
+            pStmt.executeUpdate();
+
+            pStmt.close();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw e;
 
         } finally {
             // データベース切断

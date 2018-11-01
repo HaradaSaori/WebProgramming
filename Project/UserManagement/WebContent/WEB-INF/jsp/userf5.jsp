@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<%@ page import="model.User" %>
 
 <!DOCTYPE html>
 <html>
@@ -32,7 +31,7 @@ height: 30px;
       <nav class="navbar navbar-inverse">
       	<div class="container">
       		<div class="navbar-header">
-            <a class="navbar-brand" href="userCreate.html">ユーザ管理システム</a>
+            <a class="navbar-brand" href="LoginServlet">ユーザ管理システム</a>
       		</div>
 
           <ul class="nav navbar-nav navbar-right">
@@ -45,17 +44,19 @@ height: 30px;
       </nav>
     </header>
     <!-- /header -->
+    	<c:if test="${errMsg != null}" >
+	    <div class="alert alert-danger" role="alert">
+		  ${errMsg}
+		</div>
+	</c:if>
 <div align="center"><h2>ユーザ情報更新</h2><br><br>
-<%
-// リクエストスコープからインスタンスを取得
-User user = (User)request.getAttribute("userdata");
-%>
+
 <form action="UserF5" method="post">
-<input type="hidden" value="<%= user.getLoginId() %>" name="loginid">
+<input type="hidden" value="${userdata.loginId}" name="loginid">
 <table>
 <tr>
 <td>ログインID</td>
-<td><%= user.getLoginId() %></td>
+<td>${userdata.loginId}</td>
 </tr>
 <tr>
 <td>パスワード</td>
@@ -68,11 +69,11 @@ User user = (User)request.getAttribute("userdata");
 </tr>
 <tr>
 <td>ユーザ名</td>
-<td><input type="text" name="name" value="<%= user.getName() %>"></td>
+<td><input type="text" name="name" value="${userdata.name}"></td>
 </tr>
 <tr>
 <td>生年月日</td>
-<td><input type="text" name="birth_date" value="<%= user.getBirthDate() %>"></td></tr></table><br>
+<td><input type="text" name="birth_date" value="${userdata.birthDateStr}"></td></tr></table><br>
 <input type="submit" class="btn btn-info" value="更新"></form></div><br><br>
 <a href="UserListServlet">戻る</a>
 </body>

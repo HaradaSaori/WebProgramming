@@ -25,7 +25,7 @@
       <nav class="navbar navbar-inverse">
       	<div class="container">
       		<div class="navbar-header">
-            <a class="navbar-brand" href="userCreate.html">ユーザ管理システム</a>
+            <a class="navbar-brand" href="LoginServlet">ユーザ管理システム</a>
       		</div>
 
           <ul class="nav navbar-nav navbar-right">
@@ -103,12 +103,26 @@
                      <td>${user.loginId}</td>
                      <td>${user.name}</td>
                      <td>${user.birthDate}</td>
-                     <!-- TODO 未実装；ログインボタンの表示制御を行う -->
-                     <td>
+                     <!-- ログインボタンの表示制御 -->
+
+                     <c:choose>
+					<c:when test="${userInfo.loginId == 'admin'}">
+					<td>
                        <a class="btn btn-primary" href="UserDetailServlet?id=${user.id}">詳細</a>
                        <a class="btn btn-success" href="UserF5?id=${user.id}">更新</a>
                        <a class="btn btn-danger" href ="Userdelete?id=${user.id}">削除</a>
                      </td>
+					</c:when>
+					<c:when test="${userInfo.loginId == user.loginId}">
+					<td>
+                       <a class="btn btn-primary" href="UserDetailServlet?id=${user.id}">詳細</a>
+                       <a class="btn btn-success" href="UserF5?id=${user.id}">更新</a>
+                     </td></c:when>
+                     <c:when test="${userInfo.loginId != user.loginId && userInfo.loginId != 'admin'}">
+					<td>
+                       <a class="btn btn-primary" href="UserDetailServlet?id=${user.id}">詳細</a>
+                     </td></c:when>
+					</c:choose>
                    </tr>
                  </c:forEach>
                </tbody>
@@ -116,7 +130,6 @@
            </div>
          </div>
       </div>
-    </div>
 
   </body>
 </html>
